@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {  useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import biograpy from "../../../Images/news_296_all-sports-banner_nq.png";
 import Navigation from '../../../Pages/Shared/Navigation/Navigation';
-import {  
-  faVideo  
+import {
+  faVideo
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Container } from 'react-bootstrap';
@@ -36,28 +36,28 @@ const labels = {
 const BaseketBallDetails = () => {
 
 
-let { id } = useParams();
+  let { id } = useParams();
 
-const [tableTaPlayers, setTableTaPlayers] = useState([]);
-const [sinleTaTanis, setSinleTaTanis] = useState({});
-/* const [quantity, setQuantity] = useState(1); */
+  const [baseballPlayers, setBaseballPlayers] = useState([]);
+  const [singleBaseball, setSingleBaseball] = useState({});
+  /* const [quantity, setQuantity] = useState(1); */
 
-useEffect(() => {
-fetch('https://enigmatic-garden-34025.herokuapp.com/basketBall',)
-.then(res => res.json())
-.then(data => setTableTaPlayers(data))
-}, [])
-useEffect(() => {
-const foundPlayers = tableTaPlayers.find(player => (player.id === id))
-setSinleTaTanis(foundPlayers)
-}, [tableTaPlayers, id])
+  useEffect(() => {
+    fetch('https://enigmatic-garden-34025.herokuapp.com/basketBall',)
+      .then(res => res.json())
+      .then(data => setBaseballPlayers(data))
+  }, [])
+  useEffect(() => {
+    const foundPlayers = baseballPlayers.find(player => (player.id === id))
+    setSingleBaseball(foundPlayers)
+  }, [baseballPlayers, id])
 
 
   const [value, setValue] = React.useState(2);
-  const [hover, setHover] = React.useState(-1);  
+  const [hover, setHover] = React.useState(-1);
 
 
-  const ininsialComment = { name: '', PlayerName: '', deatls: '', url: '',feedback: "", labels: "" };
+  const ininsialComment = { name: '', PlayerName: '', deatls: '', url: '', feedback: "", labels: "" };
 
   const [orderinfo, setOrderinfo] = useState(ininsialComment);
 
@@ -70,310 +70,291 @@ setSinleTaTanis(foundPlayers)
     const newValue = { ...orderinfo };
     newValue[filed] = value;
     setOrderinfo(newValue);
-    console.log(newValue);  
+    console.log(newValue);
 
   }
 
- 
+  const hendalPalyer = player => {
+    player.preventDefault();
 
-  const handelonSubmit = data => {
-      data.preventDefault();
-  
-      
-  
-      const newDispalyReviwe = {
-        ...orderinfo
-      }
-  
-      fetch('https://enigmatic-garden-34025.herokuapp.com/review', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(newDispalyReviwe)
-      })
-        .then(res => res.json())
-        .then(data => console.log(data));
-  
+
+
+
+    if (orderinfo === "") {
+      alert("I CAmakd")
     }
 
 
 
+  }
 
-
-    const hendalPalyer = player => {
-      player.preventDefault();
-
-      
-      
-
-     if(orderinfo ===  ""){
-       alert("I CAmakd")
-     }
+  const handelonSubmit = data => {
+    data.preventDefault();
 
 
 
-}
+    const newDispalyReviwe = {
+      ...orderinfo
+    }
+
+    fetch('https://enigmatic-garden-34025.herokuapp.com/review', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(newDispalyReviwe)
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
+
+  }
 
 
 
 
-console.log(sinleTaTanis);
+
+  /* const hendalPalyer = player => {
+    player.preventDefault();
+
+
+
+
+    if (orderinfo === "") {
+      alert("I CAmakd")
+    }
+
+
+
+  } */
 
 
 
 
 
-    return (
+  return (
+    <>
+      <Navigation />
       <>
-        <Navigation />
-        <>
         <div className='details-player-main' >
-            <div className='details-player-bgimg'></div>
-            <Container className='details-player-info'>
-                <div>
-                    <h1 className='details-player-title'>{sinleTaTanis?.name }  </h1>
+          <div className='details-player-bgimg'></div>
+          <Container className='details-player-info'>
+            <div>
+              <h1 className='details-player-title'>{singleBaseball?.name}  </h1>
 
-                    <p className='details-player-des'>{sinleTaTanis?.describe }</p>
-                    <button className='details-connecting cart-btn'
-                    type='button' data-bs-toggle="modal" data-bs-target="#exampleModal">Conecting</button>
-                    
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div style={{marginLeft: "300px", marginTop: "50px"}} class="modal-dialog">
-                          <div style={{width: "1000px"}} class="modal-content modal-style">
-                            <div class="modal-header-style">
-                              <h5 class="modal-titel1 mb-3">Send Your Variable Messages </h5>
+              <p className='details-player-des'>{singleBaseball?.describe}</p>
+              <button className='details-connecting cart-btn'
+                type='button' data-bs-toggle="modal" data-bs-target="#exampleModal">Conecting</button>
+
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div style={{ marginLeft: "300px", marginTop: "50px" }} class="modal-dialog">
+                  <div style={{ width: "1000px" }} class="modal-content modal-style">
+                    <div class="modal-header-style">
+                      <h5 class="modal-titel1 mb-3">Send Your Variable Messages </h5>
+                    </div>
+                    <div class="modal-body">
+                      <div className="text-center text-white">
+
+
+                        <div style={{ display: "flex" }} className="PlayerIcon">
+                          <div className="location">
+                            <img style={{ width: "100px", padding: "20px" }} src={location} alt="" />
+
+                            <h6>Mirpur 01, Dhaka, bd</h6>
+                          </div>
+                          <div className="email">
+                            <img style={{ width: "100px", padding: "20px", opacity: ".4" }} src={email} alt="" />
+                            <h6>sport@gmail.com</h6>
+
+                          </div>
+
+                          <div className="phone">
+                            <img style={{ width: "100px", padding: "20px" }} src={phone} alt="" />
+                            <h6>01908145097</h6>
+
+                          </div>
+
+                        </div>
+                      </div>
+
+
+
+                      <button className='details-player-video'><FontAwesomeIcon style={{ marginRight: '5px' }} icon={faVideo} />  <div className="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                        <div className="modal-dialog modal-dialog-centered">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h5 className="modal-title" style={{ color: 'ButtonText' }} id="exampleModalToggleLabel">Player details video</h5>
+                              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
-                              <div className="text-center text-white">
-                                
-
-                                <div style={{display: "flex"}} className="PlayerIcon">
-                                  <div className="location">
-                                <img style={{width: "100px", padding: "20px"}} src={location} alt="" />
-
-                                <h6>{sinleTaTanis?.nationality}</h6>
-                                  </div>
-                                  <div className="email">
-                                <img style={{width: "100px", padding: "20px", opacity: ".4"}} src={email} alt="" />
-                                <h6>sport@gmail.com</h6>
-
-                                  </div>
-
-                                  <div className="phone">
-                                <img style={{width: "100px", padding: "20px"}} src={phone} alt="" />
-                                <h6>01908145097</h6>
-
-                                  </div>
-
-                                </div>
-
-
-<form style={{marginTop: "100px"}} onSubmit={hendalPalyer}>
-
-          <br />
-          <input type="text" name='name'
-            onBlur={hendalOnBlure} id="" placeholder='Your Name' 
-            required
-            style={{width: "200px", padding: "10px", borderRadius: "05px", margin: "20px"}}
-            />
-
-          <input type="text" name='email'
-            onBlur={hendalOnBlure} id="" placeholder='Your Email'
-            required 
-            style={{width: "200px", padding: "10px", borderRadius: "05px", margin: "20px"}}
-            />
-
-          
-
-          <input name='PlayerName'
-            onBlur={hendalOnBlure} defaultValue={sinleTaTanis?.name} type="text" id="" placeholder='Player Name' 
-            required
-            
-            style={{width: "200px", padding: "10px", borderRadius: "05px", margin: "20px"}}
-            />
-
-<textarea className='textarea' onBlur={hendalOnBlure} type="text" name='deatls' placeholder='Type Your Feedback'
-style={{width: "400px", padding: "10px", borderRadius: "05px", margin: "20px"}} /> <br />
-
-
-<button class="modal-btn"  type="button">Send</button>
-                                
-</form>
-                                
-                                
-                              </div>
+                            <div className="modal-body">
+                              {/* <video src={video}></video> */}
+                              <iframe width="455" height="250" src="https://www.youtube.com/embed/387782CRNQM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
-                            <div class="modal-footer">
-                              <button type="button" class="modal-btn" data-bs-dismiss="modal">Close</button>
-                              
-                            </div>
+
                           </div>
                         </div>
                       </div>
-                    
+
+                        <a className='player-details-video' data-bs-toggle="modal" href="#exampleModalToggle" role="button">Play video</a></button>
 
 
-                      <button className='details-player-video'><FontAwesomeIcon style={{marginRight:'5px'}}  icon={faVideo} />  <div className="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-  <div className="modal-dialog modal-dialog-centered">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h5 className="modal-title" style={{color:'ButtonText'}} id="exampleModalToggleLabel">Player details video</h5>
-        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div className="modal-body">
-       {/* <video src={video}></video> */}
-       <iframe width="455" height="250" src="https://www.youtube.com/embed/387782CRNQM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-     
-    </div>
-  </div>
-</div>
+                      <input name='PlayerName'
+                        onBlur={hendalOnBlure} defaultValue={singleBaseball?.name} type="text" id="" placeholder='Player Name'
+                        required
 
-<a className='player-details-video' data-bs-toggle="modal" href="#exampleModalToggle" role="button">Play video</a></button>
+                        style={{ width: "200px", padding: "10px", borderRadius: "05px", margin: "20px" }}
+                      />
+
+                      <textarea className='textarea' onBlur={hendalOnBlure} type="text" name='deatls' placeholder='Type Your Feedback'
+                        style={{ width: "400px", padding: "10px", borderRadius: "05px", margin: "20px" }} /> <br />
 
 
+                      <button class="modal-btn" type="button">Send</button>
+                    </div >
+                  </div >
+                  <div class="modal-footer">
+                    <button type="button" class="modal-btn" data-bs-dismiss="modal">Close</button>
 
+                  </div>
+                </div >
+              </div >
+            </div >
+            <button className='details-player-video'><FontAwesomeIcon style={{ marginRight: '5px' }} icon={faVideo} />Play video</button>
+            <div>
+              {/* <div className='details-single-img'></div> */}
+              <img className='details-player-img' src={singleBaseball?.img} alt="" />
+            </div>
+          </Container >
+        </div >
+      </>
 
+      <>
+        <div className='biography container'>
+          <div className='row'>
+            <div className='col-md-6'>
+              <div className='style-playerDetails'>
+                <h1 style={{ marginBottom: "50px", fontSize: "40px", fontWeight: "700" }} className='playerHeading'>Biography</h1>
+                <h2 style={{ marginBottom: "40px", fontSize: "30px", fontWeight: "600" }}>
+                  {singleBaseball?.name}
+                </h2>
 
-
-                </div>
+                <p style={{ marginBottom: "10px", fontSize: "20px", fontWeight: "400", width: "500px" }}>{singleBaseball?.describe}</p>
+                <p style={{ marginBottom: "10px", fontSize: "20px", fontWeight: "400", width: "500px" }}>He has spent his entire professional career with Barcelona, where he has won a club-record 34 trophies, including ten La Liga titles, four UEFA Champions League titles and six Copas del Rey.</p>
+                <p style={{ marginBottom: "40px", fontSize: "20px", fontWeight: "400", width: "500px" }}>A prolific goalscorer and a creative playmaker, Messi holds the records for most goals in La Liga (419), a La Liga and European league season (50), most hat-tricks in the UEFA Champions League (8), and most assists in La Liga (169) and the Copa América (12). He has scored 698 senior career goals for club and country.</p>
                 <div>
-                    {/* <div className='details-single-img'></div> */}
-                    <img className='details-player-img' src={sinleTaTanis?.img } alt="" />
-                </div>
-            </Container>
-        </div>
-        </>
-        
-       
-      <div className='biography container'>
-      <div className='row'>
-          <div className='col-md-6'>
-          <div className='style-playerDetails'>
-          <h1 style={{marginBottom: "50px", fontSize: "40px", fontWeight: "700"}} className='playerHeading'>Biography</h1>
-          <h2 style={{marginBottom: "40px", fontSize: "30px", fontWeight: "600"}}>
-            {sinleTaTanis?.name}
-          </h2>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td style={{ fontWeight: "600", fontSize: "16px" }}><strong>Height</strong></td>
+                        <td style={{ color: "#dc3545", fontWeight: "700", fontSize: "18px" }}>{singleBaseball?.Height}</td>
+                      </tr >
+                      <tr>
+                        <td style={{ fontWeight: "600", fontSize: "16px" }}><strong>Weight</strong></td>
+                        <td style={{ color: "#dc3545", fontWeight: "700", fontSize: "18px" }}>{singleBaseball?.Weight}</td>
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "600", fontSize: "16px" }}><strong>Position</strong></td>
+                        <td style={{ color: "#dc3545", fontWeight: "700", fontSize: "18px" }}>{singleBaseball?.Position}</td>
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "600", fontSize: "16px" }}><strong>Nationality</strong></td>
+                        <td style={{ color: "#dc3545", fontWeight: "700", fontSize: "18px" }}>{singleBaseball?.Nationality}</td>
+                      </tr>
+                    </tbody >
+                  </table >
+                </div >
 
-          <p style={{marginBottom: "10px", fontSize: "20px", fontWeight: "400", width: "500px"}}>{sinleTaTanis?.describe}</p>
-          <p style={{marginBottom: "10px", fontSize: "20px", fontWeight: "400", width: "500px"}}>He has spent his entire professional career with Barcelona, where he has won a club-record 34 trophies, including ten La Liga titles, four UEFA Champions League titles and six Copas del Rey.</p>
-          <p style={{marginBottom: "40px", fontSize: "20px", fontWeight: "400", width: "500px"}}>A prolific goalscorer and a creative playmaker, Messi holds the records for most goals in La Liga (419), a La Liga and European league season (50), most hat-tricks in the UEFA Champions League (8), and most assists in La Liga (169) and the Copa América (12). He has scored 698 senior career goals for club and country.</p>
-          <div>
-              <table>
-                  <tbody>
-                      <tr>
-                          <td style={{ fontWeight: "600", fontSize: "16px"}}><strong>Height</strong></td>
-                          <td style={{color: "#dc3545", fontWeight: "700", fontSize: "18px"}}>{sinleTaTanis?.height}</td>
-                      </tr>
-                      <tr>
-                          <td style={{ fontWeight: "600", fontSize: "16px"}}><strong>Weight</strong></td>
-                          <td style={{color: "#dc3545", fontWeight: "700", fontSize: "18px"}}>{sinleTaTanis?.weight}</td>
-                      </tr>
-                      <tr>
-                          <td style={{ fontWeight: "600", fontSize: "16px"}}><strong>Position</strong></td>
-                          <td style={{color: "#dc3545", fontWeight: "700", fontSize: "18px"}}>{sinleTaTanis?.position}</td>
-                      </tr>
-                      <tr>
-                          <td style={{ fontWeight: "600", fontSize: "16px"}}><strong>Nationality</strong></td>
-                          <td style={{color: "#dc3545", fontWeight: "700", fontSize: "18px"}}>{sinleTaTanis?.nationality}</td>
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
-
-          </div>
-          </div>
-          <div className='col-md-6 banner'>
+              </div >
+            </div >
+            <div className='col-md-6 banner'>
               <img src={biograpy} alt="" />
+            </div>
+          </div >
+        </div >
+
+        <div className="playerman container">
+          <h1 style={{ marginTop: "100px", marginBottom: "50px" }}>Player Say!</h1>
+          <div className="player">
+            <img src={singleBaseball?.img} alt="" />
+            <h2>{singleBaseball?.name}</h2>
+            <h4>{singleBaseball?.Position}</h4>
+            <p>{singleBaseball?.describe}</p>
           </div>
-      </div>
-  </div>
- 
-<div className="playerman container">
-  <h1 style={{marginTop:  "100px", marginBottom: "50px"}}>Player Say!</h1>
-  <div className="player">
-  <img src={sinleTaTanis?.img} alt="" />
-  <h2>{sinleTaTanis?.name}</h2>
-  <h4>{sinleTaTanis?.Position}</h4>
-  <p>{sinleTaTanis?.describe}</p>
-  </div>
- 
-</div>
-
-<PlayerReviwe />
-
-<Container className="Player-All">
-    
-    <div className="From-Main">
-     
-        <Button style={{background: "#dc3545", border: "none", padding: "10px 10px"}}>#Tell Us About Your Player Feedback </Button>
-
-        <h2 style={{marginBottom: "20px", marginTop: "50px"}}>About Your Feedback</h2>
-        <div className="border">
 
         </div>
 
-        <form className='From' >
+        <PlayerReviwe />
+
+        <Container className="Player-All">
+
+          <div className="From-Main">
+
+            <Button style={{ background: "#dc3545", border: "none", padding: "10px 10px" }}>#Tell Us About Your Player Feedback </Button>
+
+            <h2 style={{ marginBottom: "20px", marginTop: "50px" }}>About Your Feedback</h2>
+            <div className="border">
+
+            </div>
+
+            <form className='From' >
 
 
-          <div className="Rating">
-            <Typography sx={{ fontWeight: '700' }} >Your Rating</Typography>
-            <Rating
-              name="feedback"
-              onBlur={hendalOnBlure}
-              value={value}
-              precision={0.5}
+              <div className="Rating">
+                <Typography sx={{ fontWeight: '700' }} >Your Rating</Typography>
+                <Rating
+                  name="feedback"
+                  onBlur={hendalOnBlure}
+                  value={value}
+                  precision={0.5}
 
-              onChange={(event, newValue) => {
-                setValue(newValue);
-              }}
-              onChangeActive={(event, newHover) => {
-                setHover(newHover);
-              }}
-              emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-            />
-            {value !== null && (
-              <Box  sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-            )}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                  onChangeActive={(event, newHover) => {
+                    setHover(newHover);
+                  }}
+                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                />
+                {value !== null && (
+                  <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+                )}
+
+              </div>
+
+              <input className='textarea' onBlur={hendalOnBlure} type="text" name='deatls' placeholder='Type Your Feedback' />
+              <br />
+              <input type="text" name='name'
+                onBlur={hendalOnBlure} id="" placeholder='Your Name' />
+
+              <input type="text" name='email'
+                onBlur={hendalOnBlure} id="" placeholder='Your Email' />
+
+
+
+              <input name='PlayerName'
+                onBlur={hendalOnBlure} defaultValue={singleBaseball?.name} type="text" id="" placeholder='Player Name' />
+
+              <input type="url" name="url" onBlur={hendalOnBlure} id="" placeholder='Type a Photo url' />
+
+              <br /><br />
+              <Button onClick={handelonSubmit}
+
+                style={{ background: "#dc3545", border: "none", padding: "10px 10px" }} >Submit <IosShareIcon /></Button>
+
+
+            </form>
+
 
           </div>
 
-          <input className='textarea' onBlur={hendalOnBlure} type="text" name='deatls' placeholder='Type Your Feedback' />
-          <br />
-          <input type="text" name='name'
-            onBlur={hendalOnBlure} id="" placeholder='Your Name' />
-
-          <input type="text" name='email'
-            onBlur={hendalOnBlure} id="" placeholder='Your Email' />
-
-          
-
-          <input name='PlayerName'
-            onBlur={hendalOnBlure} defaultValue={sinleTaTanis?.name} type="text" id="" placeholder='Player Name' />
-
-          <input  type="url" name="url" onBlur={hendalOnBlure} id="" placeholder='Type a Photo url' />
-
-          <br /><br />
-          <Button onClick={handelonSubmit}
-
-style={{background: "#dc3545", border: "none", padding: "10px 10px"}} >Submit <IosShareIcon /></Button>
-
-
-        </form>
-
-
-      </div>
-    
 
 
 
-  </Container>
+        </Container>
 
-  
-  </>
- 
-    );
+
+      </>
+    </>
+  );
 };
 
 export default BaseketBallDetails;
